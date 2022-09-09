@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kingyonas/Data/Models/items_model.dart';
+import 'package:kingyonas/Logic/cubit/cart_cubit.dart';
 import 'package:kingyonas/Presentation/common/BottomNavigatom/custom_bottom_navigation.dart';
 import 'package:kingyonas/Presentation/screens/Home/home.dart';
 import 'package:kingyonas/Presentation/screens/SplashScreen/splash_screen.dart';
@@ -19,9 +22,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return BlocProvider<CartCubit>(
+      create: (context) => CartCubit(),
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'King Yonas',
         theme: ThemeData(
           // This is the theme of your application.
           //
@@ -34,6 +39,8 @@ class _MyAppState extends State<MyApp> {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: SplashScreen());
+        home: SplashScreen(),
+      ),
+    );
   }
 }

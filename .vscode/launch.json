@@ -8,7 +8,6 @@
             "name": "King-yonas",
             "request": "launch",
             "type": "dart",
-            "program": "lib/Presentation/screens/main.dart"
         },
         {
             "name": "King-yonas (profile mode)",

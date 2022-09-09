@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kingyonas/Logic/cubit/cart_cubit.dart';
 
-import 'package:kingyonas/Data/Models/Items_model.dart';
-
+import '../../../Data/Models/Items_model.dart';
 import '../../../constants.dart';
 
 class Detail extends StatefulWidget {
   const Detail({Key? key, required this.item}) : super(key: key);
-  final ItemModel? item;
+  final ItemModel item;
 
   @override
   State<Detail> createState() => _DetailState();
@@ -31,16 +32,20 @@ class _DetailState extends State<Detail> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        width: size.width,
-        height: size.height,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage('assets/images/background.png')),
-        ),
-        child: SafeArea(
-          child: Container(
+        body: Container(
+      width: size.width,
+      height: size.height,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage('assets/images/background.png')),
+      ),
+      child: SafeArea(
+        child: BlocBuilder<CartCubit, CartState>(
+          builder: (context, CartState) =>
+              // TODO: implement listener
+
+              Container(
             color: Colors.black.withOpacity(0.5),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -55,8 +60,8 @@ class _DetailState extends State<Detail> {
                           borderRadius: BorderRadius.circular(kRadius),
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage(
-                                  widget.item!.imageUrl.toString()))),
+                              image:
+                                  AssetImage(widget.item.imageUrl.toString()))),
                       child: Stack(
                         children: [
                           Positioned(
@@ -76,7 +81,7 @@ class _DetailState extends State<Detail> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        widget.item!.title.toString(),
+                        widget.item.title.toString(),
                         style: const TextStyle(
                             color: KTextColor,
                             fontSize: 30,
@@ -86,7 +91,7 @@ class _DetailState extends State<Detail> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        widget.item!.size.toString(),
+                        widget.item.size.toString(),
                         style: const TextStyle(
                             color: KTextColor,
                             fontSize: 20,
@@ -96,7 +101,7 @@ class _DetailState extends State<Detail> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        widget.item!.description.toString(),
+                        widget.item.description.toString(),
                         style: const TextStyle(
                           color: KTextColor,
                           fontSize: 15,
@@ -110,10 +115,11 @@ class _DetailState extends State<Detail> {
                             onPressed: () {
                               _decreament();
                             },
-                            child: Text("-",
+                            child: const Text("-",
                                 style: TextStyle(color: kwhite, fontSize: 50))),
                         Text("$cartitemsvalue X",
-                            style: TextStyle(color: kwhite, fontSize: 30)),
+                            style:
+                                const TextStyle(color: kwhite, fontSize: 30)),
                         TextButton(
                             onPressed: () {
                               setState(() {
@@ -132,9 +138,11 @@ class _DetailState extends State<Detail> {
                         backgroundColor: kwhite,
                       ),
                       onPressed: () {
-                        itemCart.add(
+                        context.read<CartCubit>().addToCart(
                             Cart(items: widget.item, quantity: cartitemsvalue));
+
                         Fluttertoast.showToast(msg: "Added to cart");
+                        Navigator.pop(context);
                       },
                       child: const Center(
                           child: Text(
@@ -149,6 +157,6 @@ class _DetailState extends State<Detail> {
           ),
         ),
       ),
-    );
+    ));
   }
 }
