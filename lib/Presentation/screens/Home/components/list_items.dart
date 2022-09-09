@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kingyonas/Logic/bloc/products_bloc.dart';
 import 'package:kingyonas/constants.dart';
 
 class ListItems extends StatelessWidget {
@@ -12,30 +14,43 @@ class ListItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        if (index == 0 || index.isEven) {
-          return SizedBox(
-            height: 150,
-            child: Stack(children: [
-              RItemBody(size: size),
-              RItemImage(size: size),
-              const RItemCart()
-            ]),
-          );
+    return BlocBuilder<ProductsBloc, ProductsState>(
+      builder: (context, state) {
+        if (state is ProductsLoading) {
+          return const CircularProgressIndicator();
+        } else if (state is ProductsLoaded) {
+          return Expanded(
+              child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            itemCount: state.items!.length,
+            itemBuilder: (context, index) {
+              if (index == 0 || index.isEven) {
+                return SizedBox(
+                  height: 150,
+                  child: Stack(children: [
+                    RItemBody(size: size),
+                    RItemImage(
+                        size: size,
+                        image: state.items![index].imageUrl.toString()),
+                    const RItemCart()
+                  ]),
+                );
+              }
+              return SizedBox(
+                  height: 150,
+                  child: Stack(children: [
+                    LItemBody(size: size),
+                    LItemImage(
+                        size: size,
+                        image: state.items![index].imageUrl.toString()),
+                    const LItemCart()
+                  ]));
+            },
+          ));
         }
-        return SizedBox(
-            height: 150,
-            child: Stack(children: [
-              LItemBody(size: size),
-              LItemImage(size: size),
-              const LItemCart()
-            ]));
+        return Text("there is no such products");
       },
-    ));
+    );
   }
 }
 
@@ -64,10 +79,11 @@ class LItemImage extends StatelessWidget {
   const LItemImage({
     Key? key,
     required this.size,
+    required this.image,
   }) : super(key: key);
 
   final Size size;
-
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -79,9 +95,8 @@ class LItemImage extends StatelessWidget {
             boxShadow: [boxShadow],
             borderRadius: BorderRadius.circular(kRadius),
             color: kprimary,
-            image: const DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/img1.png'))),
+            image:
+                DecorationImage(fit: BoxFit.cover, image: AssetImage(image))),
       ),
     );
   }
@@ -218,10 +233,11 @@ class RItemImage extends StatelessWidget {
   const RItemImage({
     Key? key,
     required this.size,
+    required this.image,
   }) : super(key: key);
 
   final Size size;
-
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -232,9 +248,8 @@ class RItemImage extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(kRadius),
             color: kprimary,
-            image: const DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/img1.png'))),
+            image:
+                DecorationImage(fit: BoxFit.cover, image: AssetImage(image))),
       ),
     );
   }

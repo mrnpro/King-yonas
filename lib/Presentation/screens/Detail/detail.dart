@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:kingyonas/Logic/cubit/cart_cubit.dart';
+import 'package:kingyonas/Logic/CartCubit/cart_cubit.dart';
 
 import '../../../Data/Models/Items_model.dart';
 import '../../../constants.dart';

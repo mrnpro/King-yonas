@@ -27,9 +27,10 @@ class Home extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                  width: size.width / 3,
-                  child: Center(child: Image.asset('assets/images/logo.png'))),
+              const SizedBox(
+                height: 12,
+              ),
+              Logo(size: size),
               const SizedBox(
                 height: 12,
               ),
@@ -47,5 +48,21 @@ class Home extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class Logo extends StatelessWidget {
+  const Logo({
+    Key? key,
+    required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        width: size.width / 3,
+        child: Center(child: Image.asset('assets/images/logo.png')));
   }
 }

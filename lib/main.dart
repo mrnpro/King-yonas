@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kingyonas/Data/Models/items_model.dart';
-import 'package:kingyonas/Logic/cubit/cart_cubit.dart';
-import 'package:kingyonas/Presentation/common/BottomNavigatom/custom_bottom_navigation.dart';
-import 'package:kingyonas/Presentation/screens/Home/home.dart';
+
 import 'package:kingyonas/Presentation/screens/SplashScreen/splash_screen.dart';
 
+import 'Logic/CartCubit/cart_cubit.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   State<MyApp> createState() => _MyAppState();
 }

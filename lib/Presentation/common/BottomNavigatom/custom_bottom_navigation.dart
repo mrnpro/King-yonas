@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kingyonas/Data/Models/items_model.dart';
-import 'package:kingyonas/Logic/cubit/cart_cubit.dart';
+import 'package:kingyonas/Logic/CartCubit/cart_cubit.dart';
 import 'package:kingyonas/Presentation/screens/Cart/cart.dart';
 
 import 'package:kingyonas/Presentation/screens/Home/home.dart';

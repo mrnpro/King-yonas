@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:kingyonas/Logic/cubit/cart_cubit.dart';
+import 'package:kingyonas/Logic/CartCubit/cart_cubit.dart';
 import 'package:kingyonas/Presentation/alerts/payment_alert.dart';
 import 'package:kingyonas/Presentation/screens/Cart/components/cart_lists.dart';
 
@@ -13,14 +13,6 @@ class CartPage extends StatefulWidget {
 
   @override
   State<CartPage> createState() => _CartPageState();
-}
-
-double calculateTotalPrice(List items) {
-  double total = 0;
-  for (int i = 0; i < items.length; i++) {
-    total = total + items[i].items!.price;
-  }
-  return total;
 }
 
 class _CartPageState extends State<CartPage> {
@@ -37,54 +29,42 @@ class _CartPageState extends State<CartPage> {
                     PaymentAlert.show(context);
                   })
               : const Text("")),
-      body: Container(
-        width: size.width,
-        height: size.height,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage('assets/images/background.png')),
-        ),
-        child: SafeArea(
-          child: Container(
-            color: Colors.black.withOpacity(0.5),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Carts",
-                          style: TextStyle(
-                              color: KTextColor,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        BlocBuilder<CartCubit, CartState>(
-                          builder: (context, state) {
-                            if (state.itemCart.isNotEmpty) {
-                              return Text(
-                                "total: ${calculateTotalPrice(state.itemCart).toString()} ETB",
-                                style: TextStyle(
-                                  color: KTextColor,
-                                  fontSize: 15,
-                                ),
-                              );
-                            }
-                            return const Text("");
-                          },
-                        ),
-                      ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Carts",
+                      style: TextStyle(
+                          color: kprimary,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  const CartLists()
-                ],
+                    BlocBuilder<CartCubit, CartState>(
+                      builder: (context, state) {
+                        if (state.itemCart.isNotEmpty) {
+                          return Text(
+                            "total: ${state.total} ETB",
+                            style: const TextStyle(
+                              color: kSecondaryWhite,
+                              fontSize: 15,
+                            ),
+                          );
+                        }
+                        return const Text("");
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
+              const CartLists()
+            ],
           ),
         ),
       ),

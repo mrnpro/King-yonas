@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../Logic/cubit/cart_cubit.dart';
+import '../../../../Logic/CartCubit/cart_cubit.dart';
 import '../../../../constants.dart';
 
 class CartLists extends StatefulWidget {
@@ -41,7 +41,7 @@ class _CartListsState extends State<CartLists> {
                     height: 100,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(kRadius),
-                        color: Colors.black.withOpacity(0.5)),
+                        color: kSecondaryWhite.withOpacity(0.2)),
                     child: Row(children: [
                       Container(
                         decoration: BoxDecoration(
@@ -57,7 +57,7 @@ class _CartListsState extends State<CartLists> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
-                          width: size.width / 2.3,
+                          width: size.width / 2,
                           child: Column(
                             children: [
                               Align(
@@ -66,7 +66,7 @@ class _CartListsState extends State<CartLists> {
                                     state.itemCart[index].items!.title
                                         .toString(),
                                     style: const TextStyle(
-                                        color: kwhite,
+                                        color: kSecondaryWhite,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20)),
                               ),
@@ -77,9 +77,9 @@ class _CartListsState extends State<CartLists> {
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                        "${state.itemCart[index].quantity.toString()} X",
+                                        "${state.itemCart[index].items!.price.toString()}ETB ${state.itemCart[index].quantity.toString()} X",
                                         style: const TextStyle(
-                                            color: kwhite, fontSize: 20)),
+                                            color: kprimary, fontSize: 20)),
                                   ),
                                   Row(
                                     children: [
@@ -89,9 +89,7 @@ class _CartListsState extends State<CartLists> {
                                         child: TextButton(
                                           style: TextButton.styleFrom(
                                             primary: kwhite,
-                                            backgroundColor:
-                                                const Color.fromARGB(
-                                                    255, 141, 9, 0),
+                                            backgroundColor: Colors.red,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(5)),
@@ -113,8 +111,7 @@ class _CartListsState extends State<CartLists> {
                                         child: TextButton(
                                           style: TextButton.styleFrom(
                                             primary: kwhite,
-                                            backgroundColor:
-                                                Color.fromARGB(255, 4, 41, 6),
+                                            backgroundColor: Colors.green,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(5)),
@@ -124,7 +121,7 @@ class _CartListsState extends State<CartLists> {
                                                 .read<CartCubit>()
                                                 .increament(index);
                                           },
-                                          child: Text("+"),
+                                          child: const Text("+"),
                                         ),
                                       )
                                     ],
@@ -133,14 +130,6 @@ class _CartListsState extends State<CartLists> {
                               ),
                               const SizedBox(
                                 height: 6,
-                              ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                    state.itemCart[index].items!.price
-                                        .toString(),
-                                    style: const TextStyle(
-                                        color: kwhite, fontSize: 20)),
                               ),
                             ],
                           ),

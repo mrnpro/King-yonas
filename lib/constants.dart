@@ -10,5 +10,10 @@ final boxShadow = BoxShadow(
   color: kgreen,
   spreadRadius: 3,
   blurRadius: 2,
-  offset: Offset(0, 2), // changes position of shadow
+  offset: const Offset(0, 2), // changes position of shadow
 );
+//categories
+const realistic = "Realistic";
+const symbolic = "Symbolic";
+const expressive = "Expressive";
+const abstracts = "Abstract";

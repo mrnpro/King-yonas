@@ -1,3 +1,5 @@
+import 'package:kingyonas/constants.dart';
+
 class ItemModel {
   final int? id;
   final String? imageUrl;
@@ -5,18 +7,22 @@ class ItemModel {
   final String? size;
   final String? description;
   final int price;
+  final String? categories;
 
-  ItemModel(
-      {this.id,
-      this.imageUrl,
-      this.title,
-      this.size,
-      this.description,
-      required this.price});
+  ItemModel({
+    this.id,
+    this.imageUrl,
+    this.title,
+    this.size,
+    this.description,
+    required this.price,
+    this.categories,
+  });
 }
 
 List<ItemModel> items = [
   ItemModel(
+      categories: symbolic,
       id: 1,
       imageUrl: "assets/images/img1.png",
       title: "Pain and Injustice",
@@ -25,6 +31,7 @@ List<ItemModel> items = [
           "In the art of ballet dance, there is unspeakable pain. Our world currently mirrors that as there is soo much pain and injustice .",
       price: 12),
   ItemModel(
+      categories: symbolic,
       id: 2,
       imageUrl: "assets/images/img2.png",
       title: "Fantasy",
@@ -33,6 +40,7 @@ List<ItemModel> items = [
           "We often travel in our own imaginary world. A world where there are endless possibilities. To imagine is what makes us feel alive.",
       price: 12),
   ItemModel(
+      categories: realistic,
       id: 3,
       imageUrl: "assets/images/img3.png",
       title: "pearl",
@@ -44,7 +52,7 @@ List<ItemModel> items = [
 
 class Cart {
   final ItemModel? items;
-  int? quantity;
+  int quantity;
 
   Cart({required this.items, required this.quantity});
 }
