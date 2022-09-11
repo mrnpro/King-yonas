@@ -47,7 +47,61 @@ List<ItemModel> items = [
       size: "Medium acrylic on canvas 120x180 cm",
       description:
           "Ethiopia is full of color and diversity. In this work, Ethiopia’s incredible beauty and fascination is captured by the intrigue visual of a woman. It shows how dynamic, eccentric and mesmerizing woman can perfectly define the diversified, historied and inclusive Ethiopian culture and society.",
-      price: 12)
+      price: 12),
+  ItemModel(
+      categories: realistic,
+      id: 4,
+      imageUrl: "assets/images/real1.jpg",
+      title: " Paint Glossy",
+      size: "Medium acrylic on canvas 120x180 cm",
+      description:
+          " Paint Glossy, Semi-Realistic Portraits for the iPad in Procreate | Ruby",
+      price: 12),
+  ItemModel(
+      categories: realistic,
+      id: 4,
+      imageUrl: "assets/images/real2.jpg",
+      title: " Paint Glossy",
+      size: "Medium acrylic on canvas 120x180 cm",
+      description:
+          " Paint Glossy, Semi-Realistic Portraits for the iPad in Procreate | Ruby",
+      price: 12),
+  ItemModel(
+      categories: realistic,
+      id: 5,
+      imageUrl: "assets/images/real3.jpg",
+      title: " Paint Glossy",
+      size: "Medium acrylic on canvas 120x180 cm",
+      description:
+          " Paint Glossy, Semi-Realistic Portraits for the iPad in Procreate | Ruby",
+      price: 12),
+  ItemModel(
+      categories: realistic,
+      id: 6,
+      imageUrl: "assets/images/real4.jpg",
+      title: "Dora-Alis",
+      size: "Medium acrylic on canvas 120x180 cm",
+      description:
+          "Dora-Alis - Professional, Traditional Artist | DeviantArt | African children, Black art",
+      price: 12),
+  ItemModel(
+      categories: realistic,
+      id: 6,
+      imageUrl: "assets/images/real5.jpg",
+      title: "the art title here",
+      size: "Medium acrylic on canvas 120x180 cm",
+      description:
+          "Dora-Alis - Professional, Traditional Artist | DeviantArt | African children, Black art",
+      price: 12),
+  ItemModel(
+      categories: realistic,
+      id: 7,
+      imageUrl: "assets/images/real6.jpg",
+      title: "In this piece",
+      size: "Medium acrylic on canvas 120x180 cm",
+      description:
+          "the rhythm and strong ties of responsibility in Ghanaian family life is",
+      price: 12),
 ];
 
 class Cart {

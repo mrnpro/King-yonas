@@ -2,6 +2,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kingyonas/Presentation/screens/Detail/detail.dart';
 
 import '../../../../Logic/CartCubit/cart_cubit.dart';
 import '../../../../constants.dart';
@@ -33,7 +34,14 @@ class _CartListsState extends State<CartLists> {
                 });
               },
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  print("pressing");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Detail(item: state.itemCart[index].items)));
+                },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(

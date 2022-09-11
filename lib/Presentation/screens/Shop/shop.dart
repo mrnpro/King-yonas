@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kingyonas/Data/Models/Items_model.dart';
 
 import 'package:kingyonas/Presentation/screens/Detail/detail.dart';
 import 'package:kingyonas/constants.dart';
+
+import '../../../Data/Models/items_model.dart';
 
 class Shop extends StatelessWidget {
   const Shop({Key? key}) : super(key: key);

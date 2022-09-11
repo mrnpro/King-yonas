@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kingyonas/Logic/CartCubit/cart_cubit.dart';
 
-import '../../../Data/Models/Items_model.dart';
+import '../../../Data/Models/items_model.dart';
 import '../../../constants.dart';
 
 class Detail extends StatefulWidget {
   const Detail({Key? key, required this.item}) : super(key: key);
-  final ItemModel item;
+  final ItemModel? item;
 
   @override
   State<Detail> createState() => _DetailState();
@@ -32,131 +33,166 @@ class _DetailState extends State<Detail> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        body: Container(
-      width: size.width,
-      height: size.height,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage('assets/images/background.png')),
-      ),
-      child: SafeArea(
-        child: BlocBuilder<CartCubit, CartState>(
-          builder: (context, CartState) =>
-              // TODO: implement listener
+        body: BlocBuilder<CartCubit, CartState>(
+      builder: (context, CartState) =>
+          // TODO: implement listener
 
-              Container(
-            color: Colors.black.withOpacity(0.5),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    Container(
+          SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: size.height / 1.4,
+              child: Stack(
+                children: [
+                  Hero(
+                    transitionOnUserGestures: true,
+                    tag: widget.item!.imageUrl.toString(),
+                    child: Container(
                       width: size.width,
-                      height: size.height / 2,
+                      height: size.height / 1.6,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(kRadius),
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image:
-                                  AssetImage(widget.item.imageUrl.toString()))),
+                              image: AssetImage(
+                                  widget.item!.imageUrl.toString()))),
                       child: Stack(
                         children: [
-                          Positioned(
-                            top: 12,
-                            width: 12,
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: const Icon(Icons.arrow_back_ios),
-                              color: kwhite,
+                          const BackIconButton(),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 10,
+                    left: 10,
+                    right: 10,
+                    child: Container(
+                      width: size.width,
+                      padding: const EdgeInsets.all(8),
+                      height: 70,
+                      margin: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(kRadius),
+                          boxShadow: [boxShadow],
+                          color: kwhite),
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              widget.item!.title.toString(),
+                              style: const TextStyle(
+                                  color: kprimary,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              widget.item!.size.toString(),
+                              style: const TextStyle(
+                                  color: kSecondaryWhite,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        widget.item.title.toString(),
-                        style: const TextStyle(
-                            color: KTextColor,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      widget.item!.description.toString(),
+                      style: const TextStyle(
+                        color: kSecondaryWhite,
+                        fontSize: 15,
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        widget.item.size.toString(),
-                        style: const TextStyle(
-                            color: KTextColor,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        widget.item.description.toString(),
-                        style: const TextStyle(
-                          color: KTextColor,
-                          fontSize: 15,
+                  ),
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: size.width * 0.5,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.all(20),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(kRadius)),
+                            backgroundColor: kprimary,
+                          ),
+                          onPressed: () {},
+                          child: const Center(
+                              child: Text(
+                            "Buy Now",
+                            style: TextStyle(color: kwhite),
+                          )),
                         ),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextButton(
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(kRadius),
+                            color: kwhite,
+                            boxShadow: [boxShadow]),
+                        width: 50,
+                        height: 50,
+                        child: IconButton(
                             onPressed: () {
-                              _decreament();
+                              context.read<CartCubit>().addToCart(Cart(
+                                  items: widget.item,
+                                  quantity: cartitemsvalue));
+                              Fluttertoast.showToast(msg: "Added to cart");
+                              Navigator.pop(context);
                             },
-                            child: const Text("-",
-                                style: TextStyle(color: kwhite, fontSize: 50))),
-                        Text("$cartitemsvalue X",
-                            style:
-                                const TextStyle(color: kwhite, fontSize: 30)),
-                        TextButton(
-                            onPressed: () {
-                              setState(() {
-                                _increament();
-                              });
-                            },
-                            child: const Text("+",
-                                style: TextStyle(color: kwhite, fontSize: 50))),
-                      ],
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.all(20),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(kRadius)),
-                        backgroundColor: kwhite,
-                      ),
-                      onPressed: () {
-                        context.read<CartCubit>().addToCart(
-                            Cart(items: widget.item, quantity: cartitemsvalue));
-
-                        Fluttertoast.showToast(msg: "Added to cart");
-                        Navigator.pop(context);
-                      },
-                      child: const Center(
-                          child: Text(
-                        "ADD TO CART",
-                        style: TextStyle(color: kprimary),
-                      )),
-                    )
-                  ],
-                ),
+                            icon: SvgPicture.asset('assets/icons/cart.svg')),
+                      )
+                    ],
+                  )
+                ],
               ),
+            )
+          ],
+        ),
+      ),
+    ));
+  }
+}
+
+class BackIconButton extends StatelessWidget {
+  const BackIconButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 12,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: SafeArea(
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(kRadius), color: kwhite),
+            child: const Center(
+              child: Icon(Icons.arrow_back_ios),
             ),
           ),
         ),
       ),
-    ));
+    );
   }
 }

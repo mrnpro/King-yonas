@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kingyonas/Data/Models/items_model.dart';
 import 'package:kingyonas/Logic/bloc/products_bloc.dart';
+import 'package:kingyonas/Presentation/screens/Detail/detail.dart';
 import 'package:kingyonas/constants.dart';
+
+import '../../../../Logic/CartCubit/cart_cubit.dart';
 
 class ListItems extends StatelessWidget {
   const ListItems({
@@ -27,24 +32,43 @@ class ListItems extends StatelessWidget {
               if (index == 0 || index.isEven) {
                 return SizedBox(
                   height: 150,
-                  child: Stack(children: [
-                    RItemBody(size: size),
-                    RItemImage(
-                        size: size,
-                        image: state.items![index].imageUrl.toString()),
-                    const RItemCart()
-                  ]),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                Detail(item: state.items![index]),
+                          ));
+                    },
+                    child: Stack(children: [
+                      RItemBody(size: size, item: state.items![index]),
+                      RItemImage(
+                          size: size,
+                          image: state.items![index].imageUrl.toString()),
+                      RItemCart(item: state.items![index])
+                    ]),
+                  ),
                 );
               }
-              return SizedBox(
-                  height: 150,
-                  child: Stack(children: [
-                    LItemBody(size: size),
-                    LItemImage(
-                        size: size,
-                        image: state.items![index].imageUrl.toString()),
-                    const LItemCart()
-                  ]));
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Detail(item: state.items![index]),
+                      ));
+                },
+                child: SizedBox(
+                    height: 150,
+                    child: Stack(children: [
+                      LItemBody(size: size, item: state.items![index]),
+                      LItemImage(
+                          size: size,
+                          image: state.items![index].imageUrl.toString()),
+                      LItemCart(item: items[index])
+                    ])),
+              );
             },
           ));
         }
@@ -56,21 +80,28 @@ class ListItems extends StatelessWidget {
 
 class LItemCart extends StatelessWidget {
   const LItemCart({
+    required this.item,
     Key? key,
   }) : super(key: key);
-
+  final ItemModel item;
   @override
   Widget build(BuildContext context) {
     return Positioned(
         right: 10,
         bottom: 10,
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-              boxShadow: [boxShadow],
-              color: kwhite,
-              borderRadius: BorderRadius.circular(kRadius)),
-          child: SvgPicture.asset('assets/icons/cart.svg'),
+        child: GestureDetector(
+          onTap: () {
+            context.read<CartCubit>().addToCart(Cart(items: item, quantity: 1));
+            Fluttertoast.showToast(msg: "Added to cart");
+          },
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                boxShadow: [boxShadow],
+                color: kwhite,
+                borderRadius: BorderRadius.circular(kRadius)),
+            child: SvgPicture.asset('assets/icons/cart.svg'),
+          ),
         ));
   }
 }
@@ -90,13 +121,17 @@ class LItemImage extends StatelessWidget {
       left: 0,
       height: 150,
       width: size.width / 3,
-      child: Container(
-        decoration: BoxDecoration(
-            boxShadow: [boxShadow],
-            borderRadius: BorderRadius.circular(kRadius),
-            color: kprimary,
-            image:
-                DecorationImage(fit: BoxFit.cover, image: AssetImage(image))),
+      child: Hero(
+        tag: image,
+        transitionOnUserGestures: true,
+        child: Container(
+          decoration: BoxDecoration(
+              boxShadow: [boxShadow],
+              borderRadius: BorderRadius.circular(kRadius),
+              color: kprimary,
+              image:
+                  DecorationImage(fit: BoxFit.cover, image: AssetImage(image))),
+        ),
       ),
     );
   }
@@ -106,10 +141,11 @@ class LItemBody extends StatelessWidget {
   const LItemBody({
     Key? key,
     required this.size,
+    required this.item,
   }) : super(key: key);
 
   final Size size;
-
+  final ItemModel item;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -160,21 +196,28 @@ class LItemBody extends StatelessWidget {
 
 class RItemCart extends StatelessWidget {
   const RItemCart({
+    required this.item,
     Key? key,
   }) : super(key: key);
-
+  final ItemModel item;
   @override
   Widget build(BuildContext context) {
     return Positioned(
         left: 10,
         bottom: 10,
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-              boxShadow: [boxShadow],
-              color: kwhite,
-              borderRadius: BorderRadius.circular(kRadius)),
-          child: SvgPicture.asset('assets/icons/cart.svg'),
+        child: GestureDetector(
+          onTap: () {
+            context.read<CartCubit>().addToCart(Cart(items: item, quantity: 1));
+            Fluttertoast.showToast(msg: "Added to cart");
+          },
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                boxShadow: [boxShadow],
+                color: kwhite,
+                borderRadius: BorderRadius.circular(kRadius)),
+            child: SvgPicture.asset('assets/icons/cart.svg'),
+          ),
         ));
   }
 }
@@ -183,10 +226,11 @@ class RItemBody extends StatelessWidget {
   const RItemBody({
     Key? key,
     required this.size,
+    required this.item,
   }) : super(key: key);
 
   final Size size;
-
+  final ItemModel item;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -200,11 +244,11 @@ class RItemBody extends StatelessWidget {
               color: kSecondaryWhite.withOpacity(0.2)),
           child: Column(
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Enligntenment",
-                  style: TextStyle(
+                  item.title.toString(),
+                  style: const TextStyle(
                       color: kprimary,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
@@ -214,8 +258,8 @@ class RItemBody extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: SizedBox(
                   width: size.width / 2,
-                  child: const Text(
-                    "Medium acryliadfadfadc with mixed media on canvas",
+                  child: Text(
+                    item.size.toString(),
                     style: TextStyle(
                         fontSize: 10,
                         color: kSecondaryWhite,
@@ -244,12 +288,16 @@ class RItemImage extends StatelessWidget {
       right: 0,
       height: 150,
       width: size.width / 3,
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(kRadius),
-            color: kprimary,
-            image:
-                DecorationImage(fit: BoxFit.cover, image: AssetImage(image))),
+      child: Hero(
+        transitionOnUserGestures: true,
+        tag: image,
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(kRadius),
+              color: kprimary,
+              image:
+                  DecorationImage(fit: BoxFit.cover, image: AssetImage(image))),
+        ),
       ),
     );
   }
