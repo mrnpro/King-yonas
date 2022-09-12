@@ -102,6 +102,60 @@ List<ItemModel> items = [
       description:
           "the rhythm and strong ties of responsibility in Ghanaian family life is",
       price: 12),
+  ItemModel(
+      categories: expressive,
+      id: 8,
+      imageUrl: "assets/images/ex1.jpg",
+      title: "In this piece",
+      size: "Medium acrylic on canvas 120x180 cm",
+      description:
+          "the rhythm and strong ties of responsibility in Ghanaian family life is",
+      price: 12),
+  ItemModel(
+      categories: expressive,
+      id: 9,
+      imageUrl: "assets/images/ex2.png",
+      title: "In this piece",
+      size: "Medium acrylic on canvas 120x180 cm",
+      description:
+          "the rhythm and strong ties of responsibility in Ghanaian family life is",
+      price: 12),
+  ItemModel(
+      categories: expressive,
+      id: 9,
+      imageUrl: "assets/images/ex3.jpg",
+      title: "In this piece",
+      size: "Medium acrylic on canvas 120x180 cm",
+      description:
+          "the rhythm and strong ties of responsibility in Ghanaian family life is",
+      price: 12),
+  ItemModel(
+      categories: abstracts,
+      id: 9,
+      imageUrl: "assets/images/abst1.jpg",
+      title: "In this piece",
+      size: "Medium acrylic on canvas 120x180 cm",
+      description:
+          "the rhythm and strong ties of responsibility in Ghanaian family life is",
+      price: 12),
+  ItemModel(
+      categories: abstracts,
+      id: 9,
+      imageUrl: "assets/images/abst2.jpg",
+      title: "In this piece",
+      size: "Medium acrylic on canvas 120x180 cm",
+      description:
+          "the rhythm and strong ties of responsibility in Ghanaian family life is",
+      price: 12),
+  ItemModel(
+      categories: abstracts,
+      id: 9,
+      imageUrl: "assets/images/abst3.jpg",
+      title: "In this piece",
+      size: "Medium acrylic on canvas 120x180 cm",
+      description:
+          "the rhythm and strong ties of responsibility in Ghanaian family life is",
+      price: 12),
 ];
 
 class Cart {

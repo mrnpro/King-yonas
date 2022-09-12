@@ -6,6 +6,7 @@ import 'package:kingyonas/Presentation/alerts/payment_alert.dart';
 import 'package:kingyonas/Presentation/screens/Cart/components/cart_lists.dart';
 
 import '../../../constants.dart';
+import 'components/bottom_info_sheet.dart';
 import 'components/cirular_buttons.dart';
 
 class CartPage extends StatefulWidget {
@@ -23,10 +24,11 @@ class _CartPageState extends State<CartPage> {
       floatingActionButton: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) => state.itemCart.isNotEmpty
               ? FloatingActionButton(
-                  backgroundColor: const Color.fromARGB(255, 0, 82, 3),
+                  backgroundColor: kprimary,
                   child: const Icon(Icons.done),
                   onPressed: () {
-                    PaymentAlert.show(context);
+                    // PaymentAlert.show(context);
+                    BottomUserInformationSheet.show(context, size);
                   })
               : const Text("")),
       body: SafeArea(
@@ -42,7 +44,7 @@ class _CartPageState extends State<CartPage> {
                     const Text(
                       "Carts",
                       style: TextStyle(
-                          color: kprimary,
+                          color: kSecondaryWhite,
                           fontSize: 30,
                           fontWeight: FontWeight.bold),
                     ),

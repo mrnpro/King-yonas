@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kingyonas/Presentation/screens/Detail/detail.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../Logic/CartCubit/cart_cubit.dart';
 import '../../../../constants.dart';
@@ -20,6 +21,20 @@ class _CartListsState extends State<CartLists> {
     Size size = MediaQuery.of(context).size;
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
+        if (state.itemCart.isEmpty) {
+          return SizedBox(
+            height: size.height / 1.5,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                    onTap: () => {},
+                    child: LottieBuilder.asset('assets/lottie/emptyCart.json')),
+                const Text("Empty Cart")
+              ],
+            ),
+          );
+        }
         return Expanded(
             child: ListView.builder(
           physics: const BouncingScrollPhysics(),

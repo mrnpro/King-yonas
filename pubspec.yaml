@@ -37,12 +37,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   salomon_bottom_bar:
   carousel_slider: ^4.1.1
-  # lottie: ^1.4.1
+  lottie: ^1.4.1
   fluttertoast: ^8.0.9
   google_fonts: ^3.0.1
   flutter_svg: ^1.1.4
   flutter_bloc:
   equatable:
+  webview_flutter: ^3.0.4
+  flutter_overboard: ^3.1.1
   # qr_flutter:
   # pinput:
  
@@ -74,7 +76,8 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-
+    - assets/lottie/
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

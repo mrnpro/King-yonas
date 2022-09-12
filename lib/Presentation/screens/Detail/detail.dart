@@ -56,8 +56,8 @@ class _DetailState extends State<Detail> {
                               image: AssetImage(
                                   widget.item!.imageUrl.toString()))),
                       child: Stack(
-                        children: [
-                          const BackIconButton(),
+                        children: const [
+                          BackIconButton(),
                         ],
                       ),
                     ),
@@ -120,7 +120,7 @@ class _DetailState extends State<Detail> {
                   ),
                   const SizedBox(height: 30),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
                         width: size.width * 0.5,
@@ -140,6 +140,7 @@ class _DetailState extends State<Detail> {
                         ),
                       ),
                       Container(
+                        margin: const EdgeInsets.all(15),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(kRadius),
                             color: kwhite,

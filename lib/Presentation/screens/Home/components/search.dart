@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kingyonas/Presentation/screens/SearchArea/search_area.dart';
 
 import '../../../../constants.dart';
 
@@ -13,7 +14,10 @@ class Search extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SearchArea()));
+      },
       child: Container(
         padding: const EdgeInsets.all(15),
         width: size.width,

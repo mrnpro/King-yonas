@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kingyonas/Presentation/screens/OnBoarding/onboarding.dart';
 
 import 'package:kingyonas/Presentation/screens/SplashScreen/splash_screen.dart';
 
@@ -40,7 +41,7 @@ class _MyAppState extends State<MyApp> {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
