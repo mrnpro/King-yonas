@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kingyonas/Data/Models/items_model.dart';
-import 'package:kingyonas/Logic/bloc/products_bloc.dart';
+import 'package:kingyonas/Logic/productsBloc/products_bloc.dart';
 import 'package:kingyonas/Presentation/screens/Detail/detail.dart';
 import 'package:kingyonas/constants.dart';
 

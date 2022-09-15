@@ -45,6 +45,9 @@ dependencies:
   equatable:
   webview_flutter: ^3.0.4
   flutter_overboard: ^3.1.1
+  country_picker: ^2.0.16
+  flutter_localizations:
+    sdk: flutter
   # qr_flutter:
   # pinput:
  

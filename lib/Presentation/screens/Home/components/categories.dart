@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kingyonas/Data/Models/items_model.dart';
-import 'package:kingyonas/Logic/bloc/products_bloc.dart';
+import 'package:kingyonas/Logic/productsBloc/products_bloc.dart';
 import 'package:kingyonas/constants.dart';
 
 import 'category_buttons.dart';

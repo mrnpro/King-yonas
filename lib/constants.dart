@@ -7,8 +7,8 @@ const kSecondaryWhite = Color.fromARGB(255, 104, 104, 104);
 final kgreen = const Color.fromARGB(255, 69, 255, 115).withOpacity(0.1);
 const kRadius = 16.0;
 final boxShadow = BoxShadow(
-  color: kprimary.withOpacity(0.1),
-  spreadRadius: 3,
+  color: Color.fromARGB(255, 230, 230, 230),
+  spreadRadius: 1,
   blurRadius: 2,
   offset: const Offset(0, 2), // changes position of shadow
 );

@@ -41,7 +41,7 @@ class _CartListsState extends State<CartLists> {
           itemCount: state.itemCart.length,
           itemBuilder: (context, index) {
             return Dismissible(
-              key: Key(state.itemCart[index].items!.id.toString()),
+              key: UniqueKey(),
               direction: DismissDirection.endToStart,
               onDismissed: (direction) {
                 setState(() {

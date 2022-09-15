@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kingyonas/Logic/CartCubit/cart_cubit.dart';
+import 'package:kingyonas/Presentation/screens/Cart/components/bottom_choose_payment.dart';
 
 import '../../../Data/Models/items_model.dart';
 import '../../../constants.dart';
@@ -131,7 +132,9 @@ class _DetailState extends State<Detail> {
                                 borderRadius: BorderRadius.circular(kRadius)),
                             backgroundColor: kprimary,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            BottomChoosePayment.show(context, size);
+                          },
                           child: const Center(
                               child: Text(
                             "Buy Now",

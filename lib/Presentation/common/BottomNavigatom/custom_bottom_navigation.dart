@@ -23,7 +23,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 243, 237, 237),
+      backgroundColor: kwhite,
       body: getPage(),
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _currentIndex,
